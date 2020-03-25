@@ -1,0 +1,11 @@
+#ifndef QUARENVIVALINCLUDES_H
+#define QUARENVIVALINCLUDES_H
+
+#include <SDL2/SDL.h>
+#include <iostream>
+#include "QuarenvivalFunctions.h"
+#include "quarenvivalStructures.h"
+#include "QuarenvivalTextureManager.h"
+
+
+#endif // QUARENVIVALINCLUDES_H
