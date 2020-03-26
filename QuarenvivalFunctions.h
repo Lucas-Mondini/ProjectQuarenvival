@@ -14,8 +14,12 @@ void eventListener(SDL_Event event, bool running, Player* player);
 
 void initPlayerLocalization(Player* player);
 
-void setPlayerRenderBox(Player* player);
+void setPlayerRenderBox(Player* player, int frame);
 void setPlayerSize(Player* player);
+void setPlayerLocation (Player* player);
+
+Player::state setPlayerState(Player player);
+
 
 
 

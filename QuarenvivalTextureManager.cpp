@@ -71,6 +71,130 @@ pTextures LoadPlayerTextures (pTextures playerTextures, SDL_Renderer* renderer){
 
 };
 
+SDL_Texture* setPlayerTexture(Player* player, int frame){
+    if (player->actualstate == Player::STANDING_UP){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sUp;
+    }
+    else if (player->actualstate == Player::STANDING_DOWN){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sDown;
+    }
+    else if (player->actualstate == Player::STANDING_LEFT){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sLeft;
+    }
+    else if (player->actualstate == Player::STANDING_RIGHT){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sRight;
+    }
+    else if (player->actualstate == Player::STANDING_LEFT_UP){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sLeftUp;
+    }
+    else if (player->actualstate == Player::STANDING_RIGHT_UP){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sRightUp;
+    }
+    else if (player->actualstate == Player::STANDING_LEFT_DOWN){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sLeftDown;
+    }
+    else if (player->actualstate == Player::STANDING_RIGHT_DOWN){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sRightDown;
+    }
+
+
+    else if (player->actualstate == Player::RUNNING_UP){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rUp;
+    }
+    else if (player->actualstate == Player::RUNNING_DOWN){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rDown;
+    }
+    else if (player->actualstate == Player::RUNNING_LEFT){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rLeft;
+    }
+    else if (player->actualstate == Player::RUNNING_RIGHT){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rRight;
+    }
+    else if (player->actualstate == Player::RUNNING_LEFT_UP){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rLeftUp;
+    }
+    else if (player->actualstate == Player::RUNNING_RIGHT_UP){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rRightUp;
+    }
+    else if (player->actualstate == Player::RUNNING_LEFT_DOWN){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rLeftDown;
+    }
+    else if (player->actualstate == Player::RUNNING_RIGHT_DOWN){
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.rRightDown;
+    }
+    else
+    {
+        setPlayerRenderBox(player, frame);
+        return player->playerTextures.sDown;
+    }
+}
+void setPlayerRenderBox(Player* player, int frame){
+    if (player->actualstate == Player::STANDING_DOWN || player->actualstate == Player::STANDING_UP)
+    {
+        player->RenderBox.x=0;
+        player->RenderBox.y=0;
+        player->RenderBox.w=15;
+        player->RenderBox.h=27;
+    }
+
+    else if(player->actualstate == Player::STANDING_LEFT || player->actualstate == Player::STANDING_RIGHT)
+    {
+        player->RenderBox.x=0;
+        player->RenderBox.y=0;
+        player->RenderBox.w=8;
+        player->RenderBox.h=27;
+    }
+
+    else if (player->actualstate == Player::STANDING_LEFT_UP || player->actualstate == Player::STANDING_RIGHT_UP || player->actualstate == Player::STANDING_LEFT_DOWN || player->actualstate == Player::STANDING_RIGHT_DOWN)
+    {
+        player->RenderBox.x=0;
+        player->RenderBox.y=0;
+        player->RenderBox.w=12;
+        player->RenderBox.h=29;
+    }
+    else if (player->actualstate == Player::RUNNING_UP || player->actualstate == Player::RUNNING_DOWN){
+        player->RenderBox.x = (frame % 4) * 15;
+        player->RenderBox.y = 0;
+        player->RenderBox.w = 15;
+        player->RenderBox.h = 27;
+    }
+    else if (player->actualstate == Player::RUNNING_LEFT || player->actualstate == Player::RUNNING_RIGHT){
+        player->RenderBox.x = (frame % 4) * 11;
+        player->RenderBox.y = 0;
+        player->RenderBox.w = 11;
+        player->RenderBox.h = 27;
+    }
+    else if (player->actualstate == Player::RUNNING_LEFT_UP || player->actualstate == Player::RUNNING_LEFT_DOWN || player->actualstate == Player::RUNNING_RIGHT_UP || player->actualstate == Player::RUNNING_RIGHT_DOWN){
+        player->RenderBox.x = (frame % 4) * 14;
+        player->RenderBox.y = 0;
+        player->RenderBox.w = 14;
+        player->RenderBox.h = 27;
+    }
+    else{
+        player->RenderBox.x=0;
+        player->RenderBox.y=0;
+        player->RenderBox.w=15;
+        player->RenderBox.h=27;
+    }
+
+}
+
 void DestroyPlayerTextures (Player* player){
     SDL_DestroyTexture(player->playerTextures.actualTexture);
     SDL_DestroyTexture(player->playerTextures.sDown);

@@ -56,7 +56,8 @@ int main()
 
 
 
-    int quadro = 0;
+    int frame = 0;
+    int animframe = 0;
     //gameloop begins
     while (running){
         //process enters
@@ -68,8 +69,12 @@ int main()
 
         SDL_RenderClear(renderer);
 
-        setPlayerRenderBox(&player);
         setPlayerSize(&player);
+        setPlayerLocation (&player);
+        player.actualstate = setPlayerState(player);
+        player.playerTextures.actualTexture = setPlayerTexture(&player, animframe);
+        if(frame % 5 == 0)
+        cout <<"player actual state : " <<player.actualstate <<" player acceleration: x :" <<player.playerAcceleration.x <<" y :" <<player.playerAcceleration.y <<endl ;
 
         SDL_RenderCopy(renderer, player.playerTextures.actualTexture, &player.RenderBox, &player.coordinates);
 
@@ -78,7 +83,12 @@ int main()
         SDL_RenderPresent(renderer);
 
         SDL_Delay(1000/60);
-        quadro++;
+        frame++;
+        if (frame % 6 == 0)
+            animframe ++;
+
+        if(frame > 60)
+            animframe = frame = 0;
     }
     //gameloop ends
 

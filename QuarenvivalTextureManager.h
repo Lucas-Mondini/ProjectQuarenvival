@@ -12,6 +12,8 @@ void GetTextureSuccessfull(const char* fileName);
 pTextures LoadPlayerTextures (pTextures playerTextures,SDL_Renderer* renderer);
 void DestroyPlayerTextures (Player* player);
 
+SDL_Texture* setPlayerTexture(Player* player, int frame);
+
 SDL_Texture* LoadImage(const char* fileName, SDL_Renderer* renderer);
 
 #endif // QUARENVIVALTEXTUREMANAGER_H

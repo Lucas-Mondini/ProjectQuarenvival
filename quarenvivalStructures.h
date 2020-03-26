@@ -33,6 +33,10 @@ struct pTextures{
 
 };
 
+struct Acceleration{
+    int x;
+    int y;
+};
 
 
 struct Player {
@@ -55,6 +59,7 @@ struct Player {
         RUNNING_LEFT_UP,
         RUNNING_RIGHT_UP
     };
+    Acceleration playerAcceleration;
     state actualstate;
     SDL_Rect RenderBox;
     SDL_Rect coordinates;
