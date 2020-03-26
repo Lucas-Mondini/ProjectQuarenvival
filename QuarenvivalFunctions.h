@@ -9,8 +9,8 @@ void GetError();
 
 
 
-void keyListener(SDL_Event event, Player* player);
-void eventListener(SDL_Event event, bool running, Player* player);
+void keyListener(Player* player, const Uint8* keyState);
+void eventListener(SDL_Event event, bool running);
 
 void initPlayerLocalization(Player* player);
 

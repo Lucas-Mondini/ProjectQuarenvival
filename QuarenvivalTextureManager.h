@@ -9,6 +9,11 @@ int TestLoadTexture (SDL_Texture* texture, const char* fileName);
 void GetSurfaceSuccessfull(const char* fileName);
 void GetTextureSuccessfull(const char* fileName);
 
+Prop LoadProp(Prop prop, SDL_Renderer* renderer, const char* fileName);
+void DestroyProp(Prop* prop);
+
+dTextures LoadDayTextures (dTextures dayTextures, SDL_Renderer* renderer);
+
 pTextures LoadPlayerTextures (pTextures playerTextures,SDL_Renderer* renderer);
 void DestroyPlayerTextures (Player* player);
 

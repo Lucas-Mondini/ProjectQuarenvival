@@ -12,55 +12,55 @@ void GetError(){
 }
 
 
-void eventListener(SDL_Event event, bool running, Player* player)
+void eventListener(SDL_Event event, bool running)
 {
-    switch(event.type)
-    {
-        case SDL_QUIT:
-            running = false;
-            break;
-        case SDL_KEYDOWN:
-            keyListener(event, player);
-            break;
-        case SDL_KEYUP:
-            player->playerAcceleration.x = player->playerAcceleration.y = 0;
-            break;
-    }
+    if(event.type == SDL_QUIT)
+        running = false;
+//    switch(event.type)
+//    {
+//        case SDL_QUIT:
+//            running = false;
+//            break;
+//    }
 }
 
 
-void keyListener(SDL_Event event, Player* player)
+void keyListener(Player* player, const Uint8* keyState)
 {
-        switch (event.key.keysym.sym)
-        {
-            case SDLK_LEFT:
-            case SDLK_a:
-                cout <<"esquerda\n";
-                if(player->playerAcceleration.x > - 6)
-                    player->playerAcceleration.x-= 3;
-            break;
-            case SDLK_RIGHT:
-            case SDLK_d:
+
+        keyState = SDL_GetKeyboardState(NULL);
+            if(keyState[SDL_SCANCODE_RIGHT] || keyState[SDL_SCANCODE_D]){
                 cout <<"direita\n";
                 if(player->playerAcceleration.x < 6)
                     player->playerAcceleration.x+= 3;
-            break;
-            case SDLK_UP:
-            case SDLK_w:
+                else if (player->playerAcceleration.x < 0){
+                    player->playerAcceleration.x += 9;
+                }
+            }
+            if(keyState[SDL_SCANCODE_LEFT] || keyState[SDL_SCANCODE_A]){
+                cout <<"esquerda\n";
+                if(player->playerAcceleration.x > -6)
+                    player->playerAcceleration.x-= 3;
+                else if (player->playerAcceleration.x > 0){
+                    player->playerAcceleration.x -= 9;
+                }
+            }
+            if(keyState[SDL_SCANCODE_UP] || keyState[SDL_SCANCODE_W]){
                 cout <<"cima\n";
                 if(player->playerAcceleration.y > - 6)
                     player->playerAcceleration.y-= 3;
-            break;
-            case SDLK_DOWN:
-            case SDLK_s:
+                else if (player->playerAcceleration.y > 0){
+                    player->playerAcceleration.y -= 9;
+                }
+            }
+            if(keyState[SDL_SCANCODE_DOWN] || keyState[SDL_SCANCODE_S]){
                 cout <<"baixo\n";
                 if(player->playerAcceleration.y < 6)
                     player->playerAcceleration.y+= 3;
-            break;
-
-
-
-        }
+                else if (player->playerAcceleration.y < 0){
+                    player->playerAcceleration.y += 9;
+                }
+            }
 
 }
 
@@ -90,15 +90,15 @@ void setPlayerLocation (Player* player){
     if (player->coordinates.y + player->coordinates.h > 600){
         player->coordinates.y = 600 - player->coordinates.h;
     }
-    else if (player->coordinates.y < 0) {
-        player->coordinates.y = 0;
+    else if (player->coordinates.y < 100) {
+        player->coordinates.y = 100;
     }
 
 }
 
 void setPlayerSize(Player* player){
-    player->coordinates.h = player->RenderBox.h*3;
-    player->coordinates.w =  player->RenderBox.w*3;
+    player->coordinates.h = player->RenderBox.h*5;
+    player->coordinates.w =  player->RenderBox.w*5;
 }
 
 Player::state setPlayerState(Player player){
@@ -157,9 +157,11 @@ Player::state setPlayerState(Player player){
 void initPlayerLocalization(Player* player){
     player->actualstate = Player::state(0);
     player->playerTextures.actualTexture = player->playerTextures.sDown;
-    player->coordinates.x = 0;
-    player->coordinates.y = 0;
-    player->coordinates.h = 27*3;
-    player->coordinates.w = 15*3;
+    player->coordinates.x = 400;
+    player->coordinates.y = 300;
+    player->coordinates.h = 27*5;
+    player->coordinates.w = 15*5;
     player->playerAcceleration.x = player->playerAcceleration.y = 0;
+    player->RenderBox.h = 27;
+    player->RenderBox.w = 15;
 }

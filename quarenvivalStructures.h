@@ -3,6 +3,44 @@
 
 #include "quarenvivalIncludes.h"
 
+enum PROP_ID{
+    BLUE_COUCH,
+    REFRIGERATOR,
+    BED
+};
+
+struct dTextures{
+
+    SDL_Texture* Actual_Day;
+    SDL_Texture* Day_1;
+    SDL_Texture* Day_2;
+    SDL_Texture* Day_3;
+    SDL_Texture* Day_4;
+    SDL_Texture* Day_5;
+    SDL_Texture* Day_6;
+    SDL_Texture* Day_7;
+
+    SDL_Texture* iDay_1;
+    SDL_Texture* iDay_2;
+    SDL_Texture* iDay_3;
+    SDL_Texture* iDay_4;
+    SDL_Texture* iDay_5;
+    SDL_Texture* iDay_6;
+    SDL_Texture* iDay_7;
+
+    SDL_Rect dSource;
+    SDL_Rect dDestiny;
+};
+
+struct Prop
+{
+    PROP_ID id;
+    SDL_Texture* propTexture;
+    SDL_Rect propRenderBox;
+    SDL_Rect propCoordinate;
+
+};
+
 
 struct pTextures{
 
@@ -40,6 +78,15 @@ struct Acceleration{
 
 
 struct Player {
+    enum job{
+        NO_JOB,
+        DOCTOR,
+        PROGRAMMER,
+        BUILDER,
+        YOUTUBER,
+        CHEF
+    };
+
     enum state{
         STANDING_DOWN,
         STANDING_UP,
@@ -64,6 +111,10 @@ struct Player {
     SDL_Rect RenderBox;
     SDL_Rect coordinates;
     pTextures playerTextures;
+    int Cash;
+    bool sick;
+    int hungry;
+    int food;
 
 };
 

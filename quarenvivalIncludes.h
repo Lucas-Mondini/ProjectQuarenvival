@@ -2,6 +2,7 @@
 #define QUARENVIVALINCLUDES_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include "QuarenvivalFunctions.h"
 #include "quarenvivalStructures.h"

@@ -48,6 +48,85 @@ SDL_Texture* LoadImage(const char* fileName, SDL_Renderer* renderer){
     return  texture;
 }
 
+//SDL_Texture* CreateText (SDL_Renderer* renderer, const char* Text){
+//    TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24); //opens a font style and set size
+//    SDL_Color White = {255, 255, 255, 0}; //set color in rgb format
+//    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, Text, White);
+//    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+//    SDL_FreeSurface(surfaceMessage);
+//    return Message;
+//}
+
+
+Prop LoadProp(Prop prop, SDL_Renderer* renderer, const char* fileName){
+    prop.propTexture = LoadImage(fileName, renderer);
+    //here goes the prop localization and size
+    if(prop.id == 0){
+        prop.propRenderBox.h = 24;
+        prop.propRenderBox.w = 41;
+        prop.propRenderBox.y = 0;
+        prop.propRenderBox.x = 0;
+
+        prop.propCoordinate.h = 24*5;
+        prop.propCoordinate.w = 41*5;
+        prop.propCoordinate.x = 200;
+        prop.propCoordinate.y = 19*2+100;
+    }
+    else if (prop.id == 1){
+        prop.propRenderBox.h = 43;
+        prop.propRenderBox.w = 29;
+        prop.propRenderBox.y = 0;
+        prop.propRenderBox.x = 0;
+
+        prop.propCoordinate.h = 43*4;
+        prop.propCoordinate.w = 29*5;
+        prop.propCoordinate.x = 0;
+        prop.propCoordinate.y = 0+100;
+    }
+    else if (prop.id == 2){
+        prop.propRenderBox.h = 23;
+        prop.propRenderBox.w = 45;
+        prop.propRenderBox.y = 0;
+        prop.propRenderBox.x = 0;
+
+        prop.propCoordinate.h = 23*5;
+        prop.propCoordinate.w = 45*5;
+        prop.propCoordinate.x = 800-45*5;
+        prop.propCoordinate.y = 50+100;
+    }
+    return prop;
+}
+
+dTextures LoadDayTextures (dTextures dayTextures, SDL_Renderer* renderer){
+    dayTextures.Day_1 = LoadImage("../QuarenVival/assets/DayText/DAY1.bmp", renderer);
+    dayTextures.Day_2 = LoadImage("../QuarenVival/assets/DayText/DAY2.bmp", renderer);
+    dayTextures.Day_3 = LoadImage("../QuarenVival/assets/DayText/DAY3.bmp", renderer);
+    dayTextures.Day_4 = LoadImage("../QuarenVival/assets/DayText/DAY4.bmp", renderer);
+    dayTextures.Day_5 = LoadImage("../QuarenVival/assets/DayText/DAY5.bmp", renderer);
+    dayTextures.Day_6 = LoadImage("../QuarenVival/assets/DayText/DAY6.bmp", renderer);
+    dayTextures.Day_7 = LoadImage("../QuarenVival/assets/DayText/DAY7.bmp", renderer);
+
+    dayTextures.iDay_1 = LoadImage("../QuarenVival/assets/DayText/InfectedDAY1.bmp", renderer);
+    dayTextures.iDay_2 = LoadImage("../QuarenVival/assets/DayText/InfectedDAY2.bmp", renderer);
+    dayTextures.iDay_3 = LoadImage("../QuarenVival/assets/DayText/InfectedDAY3.bmp", renderer);
+    dayTextures.iDay_4 = LoadImage("../QuarenVival/assets/DayText/InfectedDAY4.bmp", renderer);
+    dayTextures.iDay_5 = LoadImage("../QuarenVival/assets/DayText/InfectedDAY5.bmp", renderer);
+    dayTextures.iDay_6 = LoadImage("../QuarenVival/assets/DayText/InfectedDAY6.bmp", renderer);
+    dayTextures.iDay_7 = LoadImage("../QuarenVival/assets/DayText/InfectedDAY7.bmp", renderer);
+
+    dayTextures.dSource.x = 0;
+    dayTextures.dSource.y = 0;
+    dayTextures.dSource.w = 248;
+    dayTextures.dSource.h = 124;
+
+    dayTextures.dDestiny.x = 300;
+    dayTextures.dDestiny.y = 0;
+    dayTextures.dDestiny.w = 200;
+    dayTextures.dDestiny.h = 100;
+
+    return dayTextures;
+}
+
 pTextures LoadPlayerTextures (pTextures playerTextures, SDL_Renderer* renderer){
    playerTextures.sDown = LoadImage("../QuarenVival/assets/Standing/down.bmp", renderer);
    playerTextures.sUp = LoadImage("../QuarenVival/assets/Standing/up.bmp", renderer);
@@ -194,7 +273,9 @@ void setPlayerRenderBox(Player* player, int frame){
     }
 
 }
-
+void DestroyProp(Prop* prop){
+    SDL_DestroyTexture(prop->propTexture);
+}
 void DestroyPlayerTextures (Player* player){
     SDL_DestroyTexture(player->playerTextures.actualTexture);
     SDL_DestroyTexture(player->playerTextures.sDown);
