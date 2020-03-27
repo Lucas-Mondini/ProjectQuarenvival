@@ -9,6 +9,18 @@ enum PROP_ID{
     BED
 };
 
+struct Background {
+    SDL_Rect location;
+    SDL_Rect source;
+    SDL_Texture* texture;
+};
+
+struct Work{
+    SDL_Rect location;
+    SDL_Rect source;
+    SDL_Texture* texture;
+};
+
 struct dTextures{
 
     SDL_Texture* Actual_Day;

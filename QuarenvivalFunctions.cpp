@@ -67,32 +67,55 @@ void keyListener(Player* player, const Uint8* keyState)
 
 
 void setPlayerLocation (Player* player){
-    if((player->playerAcceleration.x > 0 && player->coordinates.x < 800 - player->coordinates.w ) || (player->playerAcceleration.x < 0 && player->coordinates.x > 0) ){
+    bool CanMove = true;
+    for (int x = 245 ; x > 100 ; x--){
+        for (int y = 100; y > 70; y--){
+            if (player->coordinates.x < x && player->coordinates.y < y){
+                player->playerAcceleration.x = 0;
+                player->playerAcceleration.y = 0;
+                player->coordinates.x += 1;
+                player->coordinates.y += 1;
+                if(player->coordinates.x <= 150 )
+                player->actualstate = Player::RUNNING_UP;
+                else if(player->coordinates.x <= 200 && player->coordinates.x > 150)
+                player->actualstate = Player::RUNNING_LEFT_UP;
+                else if (player->coordinates.x < 245 && player->coordinates.x > 230)
+                player->actualstate = Player::RUNNING_LEFT;
+
+                CanMove = false;
+            }
+        }
+    }
+
+
+
+    if((player->playerAcceleration.x > 0 && player->coordinates.x < 800 - player->coordinates.w ) || (player->playerAcceleration.x < 0 && player->coordinates.x > 0) && CanMove ){
 
         player->coordinates.x += player->playerAcceleration.x;
     }
     else
         player->playerAcceleration.x=0;
 
-    if( (player->playerAcceleration.y > 0 && player->coordinates.y < 600 - player->coordinates.h) || (player->playerAcceleration.y < 0 && player->coordinates.y > 0) ){
+    if( (player->playerAcceleration.y > 0 && player->coordinates.y < 600 - player->coordinates.h) || (player->playerAcceleration.y < 0 && player->coordinates.y > 0 && CanMove) ){
 
         player->coordinates.y += player->playerAcceleration.y;
     }
     else
         player->playerAcceleration.y = 0;
 
-    if (player->coordinates.x + player->coordinates.w > 800){
-        player->coordinates.x = 800 - player->coordinates.w;
+    if (player->coordinates.x + player->coordinates.w > 700){
+        player->coordinates.x = 700 - player->coordinates.w;
     }
-    else if (player->coordinates.x < 0) {
-        player->coordinates.x = 0;
+    else if (player->coordinates.x < 110) {
+        player->coordinates.x = 110;
     }
-    if (player->coordinates.y + player->coordinates.h > 600){
-        player->coordinates.y = 600 - player->coordinates.h;
+    if (player->coordinates.y + player->coordinates.h > 505){
+        player->coordinates.y = 505 - player->coordinates.h;
     }
-    else if (player->coordinates.y < 100) {
-        player->coordinates.y = 100;
+    else if (player->coordinates.y < 70) {
+        player->coordinates.y = 70;
     }
+    CanMove = true;
 
 }
 

@@ -14,6 +14,10 @@ void DestroyProp(Prop* prop);
 
 dTextures LoadDayTextures (dTextures dayTextures, SDL_Renderer* renderer);
 
+Background LoadBackground (Background background, const char* fileName, SDL_Renderer* renderer);
+
+Work LoadWork (Work work, const char* fileName, SDL_Renderer* renderer);
+
 pTextures LoadPlayerTextures (pTextures playerTextures,SDL_Renderer* renderer);
 void DestroyPlayerTextures (Player* player);
 

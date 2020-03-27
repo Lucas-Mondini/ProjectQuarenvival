@@ -32,11 +32,25 @@ int TestLoadTexture (SDL_Texture* texture, const char* fileName){
     }
 }
 
+Background LoadBackground (Background background, const char* fileName, SDL_Renderer* renderer){
+    background.texture = LoadImage(fileName, renderer);
+    background.source.x = background.source.y = 0;
+    background.source.h = 600;
+    background.source.w = 800;
+
+    background.location.h = 600;
+    background.location.w = 800;
+    background.location.x = background.location.y = 0;
+
+    return background;
+}
+
 SDL_Texture* LoadImage(const char* fileName, SDL_Renderer* renderer){
     SDL_Surface* surface = SDL_LoadBMP(fileName);
     if (TestLoadSurface(surface, fileName) == NULL){
         return NULL;
     }
+
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     if (TestLoadTexture(texture, fileName) == NULL){
@@ -69,8 +83,8 @@ Prop LoadProp(Prop prop, SDL_Renderer* renderer, const char* fileName){
 
         prop.propCoordinate.h = 24*5;
         prop.propCoordinate.w = 41*5;
-        prop.propCoordinate.x = 200;
-        prop.propCoordinate.y = 19*2+100;
+        prop.propCoordinate.x = 250;
+        prop.propCoordinate.y = 80;
     }
     else if (prop.id == 1){
         prop.propRenderBox.h = 43;
@@ -80,8 +94,8 @@ Prop LoadProp(Prop prop, SDL_Renderer* renderer, const char* fileName){
 
         prop.propCoordinate.h = 43*4;
         prop.propCoordinate.w = 29*5;
-        prop.propCoordinate.x = 0;
-        prop.propCoordinate.y = 0+100;
+        prop.propCoordinate.x = 110;
+        prop.propCoordinate.y = 0+70;
     }
     else if (prop.id == 2){
         prop.propRenderBox.h = 23;
@@ -91,10 +105,23 @@ Prop LoadProp(Prop prop, SDL_Renderer* renderer, const char* fileName){
 
         prop.propCoordinate.h = 23*5;
         prop.propCoordinate.w = 45*5;
-        prop.propCoordinate.x = 800-45*5;
-        prop.propCoordinate.y = 50+100;
+        prop.propCoordinate.x = 684-45*5;
+        prop.propCoordinate.y = 100;
     }
     return prop;
+}
+Work LoadWork (Work work, const char* fileName, SDL_Renderer* renderer){
+    work.texture = LoadImage(fileName, renderer);
+    work.source.x = work.source.y = 0;
+    work.source.h = 122;
+    work.source.w = 292;
+
+    work.location.x = 400;
+    work.location.y = 600-150;
+    work.location.h = 200;
+    work.location.w = 200;
+
+    return work;
 }
 
 dTextures LoadDayTextures (dTextures dayTextures, SDL_Renderer* renderer){
@@ -119,7 +146,7 @@ dTextures LoadDayTextures (dTextures dayTextures, SDL_Renderer* renderer){
     dayTextures.dSource.w = 248;
     dayTextures.dSource.h = 124;
 
-    dayTextures.dDestiny.x = 300;
+    dayTextures.dDestiny.x = 0;
     dayTextures.dDestiny.y = 0;
     dayTextures.dDestiny.w = 200;
     dayTextures.dDestiny.h = 100;

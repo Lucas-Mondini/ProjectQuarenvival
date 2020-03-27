@@ -63,7 +63,13 @@ int main()
 
     //Create Text
     dTextures dayTextures = LoadDayTextures(dayTextures, renderer);
+    Work work = LoadWork(work, "../QuarenVival/assets/Texts/WORK.bmp", renderer);
+
     //Create Text
+
+    //Create Background
+    Background background = LoadBackground(background, "../QuarenVival/assets/background/Background.bmp", renderer);
+    //Create Background
 
 
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 0);
@@ -72,7 +78,7 @@ int main()
 
         initPlayerLocalization(&player);
 
-    dayTextures.Actual_Day = dayTextures.Day_1;
+    dayTextures.Actual_Day = dayTextures.iDay_1;
 
     int frame = 0;
     int animframe = 0;
@@ -88,11 +94,14 @@ int main()
 
         SDL_RenderClear(renderer);
 
+        player.actualstate = setPlayerState(player);
         setPlayerSize(&player);
         setPlayerLocation (&player);
-        player.actualstate = setPlayerState(player);
+
         player.playerTextures.actualTexture = setPlayerTexture(&player, animframe);
 
+        SDL_RenderCopy(renderer, background.texture, &background.source, &background.location);
+//        SDL_RenderCopy(renderer, work.texture, &work.source, &work.location);
         SDL_RenderCopy(renderer, BlueCouch.propTexture, &BlueCouch.propRenderBox, &BlueCouch.propCoordinate);
         SDL_RenderCopy(renderer, Refriferator.propTexture, &Refriferator.propRenderBox, &Refriferator.propCoordinate);
         SDL_RenderCopy(renderer, Bed.propTexture, &Bed.propRenderBox, &Bed.propCoordinate);
