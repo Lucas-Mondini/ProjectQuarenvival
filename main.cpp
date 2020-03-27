@@ -11,7 +11,7 @@ int weight = 600;
 int main()
 {
     const Uint8* keyState;
-
+    int time = 6;
     bool running;
     //initializes the SDL
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -63,7 +63,7 @@ int main()
 
     //Create Text
     dTextures dayTextures = LoadDayTextures(dayTextures, renderer);
-    Work work = LoadWork(work, "../QuarenVival/assets/Texts/WORK.bmp", renderer);
+    tImages Ekey = LoadImageTextureFillRect(Ekey, "../QuarenVival/assets/Texts/Ekey.bmp", renderer);
 
     //Create Text
 
@@ -77,9 +77,10 @@ int main()
         player.playerTextures = LoadPlayerTextures(player.playerTextures, renderer);
 
         initPlayerLocalization(&player);
+        player.nextDay = false;
 
     dayTextures.Actual_Day = dayTextures.iDay_1;
-
+    int actualday = 1;
     int frame = 0;
     int animframe = 0;
     //gameloop begins
@@ -101,13 +102,29 @@ int main()
         player.playerTextures.actualTexture = setPlayerTexture(&player, animframe);
 
         SDL_RenderCopy(renderer, background.texture, &background.source, &background.location);
-//        SDL_RenderCopy(renderer, work.texture, &work.source, &work.location);
         SDL_RenderCopy(renderer, BlueCouch.propTexture, &BlueCouch.propRenderBox, &BlueCouch.propCoordinate);
         SDL_RenderCopy(renderer, Refriferator.propTexture, &Refriferator.propRenderBox, &Refriferator.propCoordinate);
         SDL_RenderCopy(renderer, Bed.propTexture, &Bed.propRenderBox, &Bed.propCoordinate);
         SDL_RenderCopy(renderer, player.playerTextures.actualTexture, &player.RenderBox, &player.coordinates);
         SDL_RenderCopy(renderer, dayTextures.Actual_Day, &dayTextures.dSource, &dayTextures.dDestiny);
 
+        if(player.coordinates.x < 230 && player.coordinates.y < 200){
+            Ekey.location = SetEkeyLocation(&Ekey, "Refrigerator");
+            SDL_RenderCopy(renderer, Ekey.texture, &Ekey.source, &Ekey.location);
+        }
+        if(player.coordinates.x > 230 && player.coordinates.x < 400 && player.coordinates.y < 200){
+            Ekey.location = SetEkeyLocation(&Ekey, "Couch");
+            SDL_RenderCopy(renderer, Ekey.texture, &Ekey.source, &Ekey.location);
+        }
+        if( player.coordinates.x > 500 && player.coordinates.y < 200){
+            Ekey.location = SetEkeyLocation(&Ekey, "Bed");
+            dayTextures.Actual_Day = nextDay(dayTextures, actualday++);
+            SDL_RenderCopy(renderer, Ekey.texture, &Ekey.source, &Ekey.location);
+        }
+        if( player.coordinates.x > 400 && player.coordinates.x < 500 && player.coordinates.y > 300){
+            Ekey.location = SetEkeyLocation(&Ekey, "Door");
+            SDL_RenderCopy(renderer, Ekey.texture, &Ekey.source, &Ekey.location);
+        }
 
 
         SDL_RenderPresent(renderer);

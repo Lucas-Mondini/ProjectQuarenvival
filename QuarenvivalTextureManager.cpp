@@ -110,18 +110,15 @@ Prop LoadProp(Prop prop, SDL_Renderer* renderer, const char* fileName){
     }
     return prop;
 }
-Work LoadWork (Work work, const char* fileName, SDL_Renderer* renderer){
-    work.texture = LoadImage(fileName, renderer);
-    work.source.x = work.source.y = 0;
-    work.source.h = 122;
-    work.source.w = 292;
+tImages LoadImageTextureFillRect (tImages image, const char* fileName, SDL_Renderer* renderer){
+    image.texture = LoadImage(fileName, renderer);
 
-    work.location.x = 400;
-    work.location.y = 600-150;
-    work.location.h = 200;
-    work.location.w = 200;
+        image.source.x = image.source.y = 0;
+        image.source.h = 40;
+        image.source.w = 40;
 
-    return work;
+
+    return image;
 }
 
 dTextures LoadDayTextures (dTextures dayTextures, SDL_Renderer* renderer){

@@ -2,6 +2,7 @@
 #define QUARENVIVALFUNCTIONS_H
 #include "quarenvivalIncludes.h"
 #include "quarenvivalStructures.h"
+using namespace std;
 
 void CallError(bool &running);
 void GetError();
@@ -17,6 +18,9 @@ void initPlayerLocalization(Player* player);
 void setPlayerRenderBox(Player* player, int frame);
 void setPlayerSize(Player* player);
 void setPlayerLocation (Player* player);
+SDL_Rect SetEkeyLocation (tImages* image, string Location);
+SDL_Texture* nextDay(dTextures day, int i);
+
 
 Player::state setPlayerState(Player player);
 

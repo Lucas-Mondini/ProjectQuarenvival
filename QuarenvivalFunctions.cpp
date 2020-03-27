@@ -16,12 +16,9 @@ void eventListener(SDL_Event event, bool running)
 {
     if(event.type == SDL_QUIT)
         running = false;
-//    switch(event.type)
-//    {
-//        case SDL_QUIT:
-//            running = false;
-//            break;
-//    }
+    //NEXT STEP PUT THE NEXT DAY CONDITIONS HERE
+    //NEXT STEP PUT THE NEXT DAY CONDITIONS HERE
+    //NEXT STEP PUT THE NEXT DAY CONDITIONS HERE
 }
 
 
@@ -63,8 +60,56 @@ void keyListener(Player* player, const Uint8* keyState)
             }
 
 }
+SDL_Texture* nextDay(dTextures day, int i){
+    if (i == 2){
+        return day.iDay_2;
+    }
+    if (i == 3){
+        return day.iDay_3;
+    }
+    if (i == 4){
+        return day.iDay_4;
+    }
+    if (i == 5){
+        return day.iDay_5;
+    }
+    if (i == 6){
+        return day.iDay_6;
+    }
+    if (i == 7){
+        return day.iDay_7;
+    }
+}
 
+SDL_Rect SetEkeyLocation (tImages* image, string Location){
 
+    if(Location == "Refrigerator"){
+        image->location.x = 200;
+        image->location.y = 70;
+        image->location.h = 50;
+        image->location.w = 50;
+    }
+    if(Location == "Couch"){
+        image->location.x = 325;
+        image->location.y = 70;
+        image->location.h = 50;
+        image->location.w = 50;
+    }
+    if(Location == "Bed"){
+        image->location.x = 600;
+        image->location.y = 70;
+        image->location.h = 50;
+        image->location.w = 50;
+    }
+    if(Location == "Door"){
+        image->location.x = 550;
+        image->location.y = 400;
+        image->location.h = 50;
+        image->location.w = 50;
+    }
+
+    return image->location;
+}
 
 void setPlayerLocation (Player* player){
     bool CanMove = true;

@@ -15,7 +15,7 @@ struct Background {
     SDL_Texture* texture;
 };
 
-struct Work{
+struct tImages{
     SDL_Rect location;
     SDL_Rect source;
     SDL_Texture* texture;
@@ -127,6 +127,7 @@ struct Player {
     bool sick;
     int hungry;
     int food;
+    bool nextDay;
 
 };
 
